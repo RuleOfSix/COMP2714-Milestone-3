@@ -81,9 +81,11 @@ CREATE TABLE student (
 	student_id VARCHAR(10) NOT NULL,
 	student_fname VARCHAR(50) NOT NULL,
 	student_lname VARCHAR(50) NOT NULL,
+	student_email VARCHAR(100) NOT NULL,
 	student_set_id INT NOT NULL,
 	CONSTRAINT student_id_pk PRIMARY KEY (student_id),
-	CONSTRAINT student_set_id_fk_set FOREIGN KEY (student_set_id) REFERENCES set(set_id)
+	CONSTRAINT student_set_id_fk_set FOREIGN KEY (student_set_id) REFERENCES set(set_id),
+	CONSTRAINT student_email_unique UNIQUE(student_email)
 );
 
 CREATE TABLE section (
@@ -190,6 +192,22 @@ CREATE TABLE student_lab_session_progress (
 	)
 );
 
+CREATE TABLE user_t (
+	user_id VARCHAR(25) NOT NULL,
+	user_display_name VARCHAR(100) NOT NULL,
+	user_role VARCHAR(25) NOT NULL,
+	user_email VARCHAR(100) NOT NULL,
+	CONSTRAINT user_id_pk PRIMARY KEY (user_id),
+	CONSTRAINT user_email_unique UNIQUE (user_email),
+	CONSTRAINT user_role_value CHECK (
+		user_role = 'instructor' OR
+		user_role = 'ta' OR
+		user_role = 'it' OR
+		user_role = 'admin' OR
+		user_role = 'system'
+	)
+);
+
 CREATE TABLE change_log (
 	change_id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
 	change_at timestamp NOT NULL,
@@ -197,10 +215,13 @@ CREATE TABLE change_log (
 	change_field progress_field NOT NULL,
 	change_old_value VARCHAR(255) NOT NULL,
 	change_new_value VARCHAR(255) NOT NULL,
+	change_reason TEXT,
+	change_user_id VARCHAR(25) NOT NULL,
 	change_student_id VARCHAR(10) NOT NULL,
 	change_lab_crn VARCHAR(10) NOT NULL,
 	change_lab_date date NOT NULL,
 	CONSTRAINT change_id_pk PRIMARY KEY (change_id),
+	CONSTRAINT change_user_id_fk_user_t FOREIGN KEY (change_user_id) REFERENCES user_t (user_id),
 	CONSTRAINT change_student_id_lab_crn_date_fk_progress FOREIGN KEY(change_student_id, change_lab_crn, change_lab_date)
 		REFERENCES student_lab_session_progress(progress_student_id, progress_lab_crn, progress_lab_date)
 		ON UPDATE CASCADE ON DELETE CASCADE
