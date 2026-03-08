@@ -210,7 +210,6 @@ CREATE TABLE user_t (
 CREATE TABLE change_log (
 	change_id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
 	change_at timestamp NOT NULL,
-	change_by VARCHAR(50) NOT NULL,
 	change_field progress_field NOT NULL,
 	change_old_value VARCHAR(255) NOT NULL,
 	change_new_value VARCHAR(255) NOT NULL,
