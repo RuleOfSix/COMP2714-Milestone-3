@@ -4,8 +4,6 @@ SET search_path TO lab_tracker_group_24;
 
 CREATE TYPE term_season AS ENUM ('Spring/Summer', 'Fall', 'Winter');
 CREATE TYPE section_type AS ENUM ('Lecture', 'Lab');
-CREATE TYPE campus as ENUM ('Burnaby', 'Downtown');
-CREATE TYPE enroll_status AS ENUM ('Enrolled', 'Withdrawn', 'Audit', 'Dropped');
 CREATE TYPE progress_field AS ENUM (
 	'attendance',
 	'prepared',
@@ -24,7 +22,6 @@ CREATE TABLE course (
 	course_title VARCHAR(100) NOT NULL,
 	course_credits INT NOT NULL,
 	CONSTRAINT course_code_pk PRIMARY KEY (course_code),
-	CONSTRAINT course_title_unique UNIQUE (course_title),
 	CONSTRAINT course_credits_in_range CHECK (course_credits > -1 AND course_credits < 20)
 );
 
@@ -102,7 +99,6 @@ CREATE TABLE section (
 		REFERENCES course(course_code) ON UPDATE CASCADE ON DELETE CASCADE,
 	CONSTRAINT section_instructor_id_fk_instructor FOREIGN KEY (section_instructor_id) REFERENCES instructor(instructor_id),
 	CONSTRAINT section_term_fk_term FOREIGN KEY (section_term) REFERENCES term (term_code),
-	CONSTRAINT section_crn_type_unique UNIQUE (section_crn, section_type),
 	CONSTRAINT section_term_datetime_instructor_unique UNIQUE (section_term, section_datetime, section_instructor_id),
 	CONSTRAINT section_term_datetime_location_unique UNIQUE (section_term, section_datetime, section_location),
 	CONSTRAINT section_start_at_or_after_8_am CHECK (EXTRACT (HOUR FROM section_datetime) >= 8),
@@ -144,6 +140,8 @@ CREATE TABLE lab_session (
 	CONSTRAINT lsession_crn_date_pk PRIMARY KEY (lsession_crn, lsession_date),
 	CONSTRAINT lsession_crn_date_fk_session FOREIGN KEY (lsession_crn, lsession_date) 
 		REFERENCES session(session_crn, session_date) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT lsession_crn_fk_lsection FOREIGN KEY (lsession_crn) REFERENCES lab_section(lsection_crn)
+		ON UPDATE CASCADE ON DELETE CASCADE,
 	CONSTRAINT lsession_crn_lab_num_unique UNIQUE (lsession_crn, lsession_lab_num),
 	CONSTRAINT lsession_due_at_or_after_lab_date CHECK (EXTRACT (DOY FROM lsession_duedate) >= EXTRACT (DOY FROM lsession_date))
 );
@@ -152,7 +150,8 @@ CREATE TABLE set_enroll (
 	senroll_set_id INT NOT NULL,
 	senroll_crn VARCHAR(10) NOT NULL,
 	CONSTRAINT senroll_set_id_crn_pk PRIMARY KEY (senroll_set_id, senroll_crn),
-	CONSTRAINT senroll_set_id_fk_set FOREIGN KEY (senroll_set_id) REFERENCES set(set_id),
+	CONSTRAINT senroll_set_id_fk_set FOREIGN KEY (senroll_set_id) REFERENCES set(set_id)
+		ON UPDATE CASCADE,
 	CONSTRAINT senroll_crn_fk_section FOREIGN KEY (senroll_crn) REFERENCES section(section_crn)
 		ON UPDATE CASCADE ON DELETE CASCADE
 );
