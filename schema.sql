@@ -179,7 +179,7 @@ CREATE TABLE student_lab_session_progress (
 	progress_resubmitted BOOLEAN NOT NULL,
 	progress_resubmission_time timestamp,
 	progress_resubmission_link VARCHAR(255),
-	progres_is_late,
+	progress_is_late BOOLEAN,
 	progress_self_assessment_score NUMERIC(3,1),
 	progress_instructor_score NUMERIC(3,1),
 	CONSTRAINT progress_student_id_lab_crn_date_pk PRIMARY KEY (progress_student_id, progress_lab_crn, progress_lab_date),
