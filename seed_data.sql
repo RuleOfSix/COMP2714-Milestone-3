@@ -49,6 +49,16 @@ VALUES
 ('L05', '202530', 'Lab', '2025-09-10 13:30', interval '1 hour 50 minutes', 'DTC-310', 'COMP2714', 1),
 ('L06', '202530', 'Lab', '2025-09-11 18:30', interval '1 hour 50 minutes', 'DTC-318', 'COMP2714', 1);
 
+--Set enroll
+INSERT INTO lab_tracker_group_24.set_enroll(senroll_set_id, 
+                                            senroll_crn)
+VALUES
+(1, 'L01'),
+(2, 'L02'),
+(3, 'L03'),
+(4, 'L04'),
+(5, 'L05'),
+(6, 'L06');
 --TA
 INSERT INTO lab_tracker_group_24.ta (ta_crn, 
                                      fname, 
@@ -227,27 +237,25 @@ INSERT INTO student (student_id, student_fname, student_lname, student_email, st
 VALUES ('F003','Chloe','Dubois','chloe.dubois@my.bcit.ca',6);
 
 --Enroll students
-INSERT INTO lab_tracker_group_24.enroll (enroll_student_id,
-                                         enroll_crn)
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('A001','L01');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('A002','L01');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('A003','L01');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('A001','L01');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('A002','L01');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('A003','L01');
 
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('B001','L02');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('B002','L02');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('B003','L02');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('B001','L02');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('B002','L02');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('B003','L02');
 
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('D001','L04');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('D002','L04');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('D003','L04');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('D001','L04');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('D002','L04');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('D003','L04');
 
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E003','L05');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E003','L05');
 
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
-INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E003','L05');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E003','L05');
 
 -- Progress
 INSERT INTO lab_tracker_group_24.student_lab_session_progress (
