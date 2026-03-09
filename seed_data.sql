@@ -245,13 +245,13 @@ INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES (
 INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('B002','L02');
 INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('B003','L02');
 
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('C001','L03');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('C002','L03');
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('C003','L03');
+
 INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('D001','L04');
 INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('D002','L04');
 INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('D003','L04');
-
-INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
-INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
-INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E003','L05');
 
 INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
 INSERT INTO lab_tracker_group_24.enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
