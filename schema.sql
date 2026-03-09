@@ -14,7 +14,8 @@ CREATE TYPE progress_field AS ENUM (
 	'resubmission_time',
 	'resubmission_link',
 	'self_assessment_score',
-	'instructor_score'
+	'instructor_score',
+	'late'
 );
 
 CREATE TABLE course (
@@ -178,8 +179,9 @@ CREATE TABLE student_lab_session_progress (
 	progress_resubmitted BOOLEAN NOT NULL,
 	progress_resubmission_time timestamp,
 	progress_resubmission_link VARCHAR(255),
-	progress_self_assessment_score INT,
-	progress_instructor_score INT,
+	progres_is_late,
+	progress_self_assessment_score NUMERIC(3,1),
+	progress_instructor_score NUMERIC(3,1),
 	CONSTRAINT progress_student_id_lab_crn_date_pk PRIMARY KEY (progress_student_id, progress_lab_crn, progress_lab_date),
 	CONSTRAINT progress_student_id_fk_student FOREIGN KEY (progress_student_id) REFERENCES student(student_id)
 		ON UPDATE CASCADE ON DELETE CASCADE,
