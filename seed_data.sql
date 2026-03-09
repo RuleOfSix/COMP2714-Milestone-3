@@ -49,6 +49,18 @@ VALUES
 ('L05', '202530', 'Lab', '2025-09-10 13:30', interval '1 hour 50 minutes', 'DTC-310', 'COMP2714', 1),
 ('L06', '202530', 'Lab', '2025-09-11 18:30', interval '1 hour 50 minutes', 'DTC-318', 'COMP2714', 1);
 
+--TA
+INSERT INTO lab_tracker_group_24.ta (ta_crn, 
+                                     fname, 
+                                     lname)
+VALUES
+('L01', 'Daniel', 'Saavedra'),
+('L02', 'Daniel', 'Saavedra'),
+('L03', 'Daniel', 'Saavedra'),
+('L04', 'Daniel', 'Saavedra'),
+('L05', 'Daniel', 'Saavedra'),
+('L06', 'Daniel', 'Saavedra');
+
 -- Lab section
 INSERT INTO lab_tracker_group_24.lab_section (lsection_crn, 
                                               lsection_set_id)
@@ -213,3 +225,62 @@ VALUES ('F002','Amir','Kazemi','amir.kazemi@my.bcit.ca',6);
 
 INSERT INTO student (student_id, student_fname, student_lname, student_email, student_set_id)
 VALUES ('F003','Chloe','Dubois','chloe.dubois@my.bcit.ca',6);
+
+--Enroll students
+INSERT INTO lab_tracker_group_24.enroll (enroll_student_id,
+                                         enroll_crn)
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('A001','L01');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('A002','L01');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('A003','L01');
+
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('B001','L02');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('B002','L02');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('B003','L02');
+
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('D001','L04');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('D002','L04');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('D003','L04');
+
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E003','L05');
+
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E001','L05');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E002','L05');
+INSERT INTO enroll (enroll_student_id, enroll_crn) VALUES ('E003','L05');
+
+-- Progress
+INSERT INTO lab_tracker_group_24.student_lab_session_progress (
+                                                                progress_student_id, progress_lab_crn, progress_lab_date,
+                                                                progress_attendance, progress_prepared, progress_submitted,
+                                                                progress_submission_time, progress_submission_link,
+                                                                progress_resubmitted, progress_resubmission_time,
+                                                                progress_resubmission_link, progress_self_assessment_score,
+                                                                progress_instructor_score
+) VALUES
+('A001','L01','2025-09-08','Present', TRUE, TRUE,'2025-09-08 10:45','https://submit.bcit.ca/comp2714/inlab/A001-L01-L01.pdf',
+ FALSE,NULL,NULL,8,8),
+('A002','L01','2025-09-08','Present', TRUE, TRUE,'2025-09-08 10:50','https://submit.bcit.ca/comp2714/inlab/A002-L01-L01.pdf',
+ FALSE,NULL,NULL,7,7),
+('A003','L01','2025-09-08','Present', FALSE, TRUE,'2025-09-08 11:00','https://submit.bcit.ca/comp2714/inlab/A003-L01-L01.pdf',
+ FALSE,NULL,NULL,9,8),
+('B001','L02','2025-09-08','Present', TRUE, TRUE,'2025-09-08 14:45','https://submit.bcit.ca/comp2714/inlab/B001-L02-L01.pdf',
+ FALSE,NULL,NULL,8,8),
+('B002','L02','2025-09-08','Present', TRUE, FALSE,'2025-09-08 14:50','https://submit.bcit.ca/comp2714/inlab/B002-L02-L01.pdf',
+ FALSE,NULL,NULL,0,0),
+('C001','L03','2025-09-09','Present', TRUE, TRUE,'2025-09-09 19:45','https://submit.bcit.ca/comp2714/inlab/C001-L03-L01.pdf',
+ FALSE,NULL,NULL,9,9),
+('C002','L03','2025-09-09','Present', TRUE, FALSE,'2025-09-09 19:50','https://submit.bcit.ca/comp2714/inlab/C002-L03-L01.pdf',
+ FALSE,NULL,NULL,0,0);
+
+-- Progress changelog
+
+INSERT INTO lab_tracker_group_24.change_log (
+                                             change_at, change_field, change_old_value, change_new_value,
+                                             change_reason, change_user_id, change_student_id, change_lab_crn, change_lab_date
+) VALUES
+('2025-09-08 12:00','submitted','FALSE','TRUE','Student submitted inlab','u_ta1','B002','L02','2025-09-08'),
+('2025-09-09 13:00','prepared','FALSE','TRUE','Student updated prepared status','u_instructor','A003','L01','2025-09-08'),
+('2025-09-09 14:00','attendance','Absent','Present','Marked present after TA observation','u_ta1','C002','L03','2025-09-09'),
+('2025-09-10 10:00','self_assessment_score','0','7','Student added self-assessment','u_instructor','B002','L02','2025-09-08'),
+('2025-09-10 10:30','instructor_score','0','8','Instructor graded submission','u_instructor','B002','L02','2025-09-08');
